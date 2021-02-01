@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="leftPanel">
+        <h1>Coons Bicubic Surface</h1>
+
+        <button
+          class="tablink2"
+          onclick="openPage('corners', this, '#111111')"
+          id="defaultOpen"
+        >
+          Corners
+        </button>
+        <button
+          class="tablink2"
+          onclick="openPage('utangents', this, '#222222')"
+        >
+          U Tangents
+        </button>
+        <button
+          class="tablink2"
+          onclick="openPage('wtangents', this, '#333333')"
+        >
+          W Tangents
+        </button>
+        <button
+          class="tablink2"
+          onclick="openPage('uwtwists', this, '#161616')"
+        >
+          UW Twists
+        </button>
+
+        <div id="corners" class="tabcontent">
+          <fieldset id="point1" class="pointRed">
+            <legend>Point 1 (u=0, w=0) Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point1x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint1x" class="pointRed">1.000</output><br />
+            y
+            <input
+              type="range"
+              id="point1y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint1y" class="pointRed">-1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point1z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint1z" class="pointRed">-1.000</output><br />
+          </fieldset>
+          <fieldset id="point2" class="pointGreen">
+            <legend>Point 2 (u=0, w=1) Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point2x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint2x" class="pointGreen">1.000</output><br />
+            y
+            <input
+              type="range"
+              id="point2y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint2y" class="pointGreen">-1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point2z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint2z" class="pointGreen">1.000</output><br />
+          </fieldset>
+          <fieldset id="point3" class="pointBlue">
+            <legend>Point 3 (u=1, w=0) Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point3x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint3x" class="pointBlue">1.000</output><br />
+            y
+            <input
+              type="range"
+              id="point3y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint3y" class="pointBlue">1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point3z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint3z" class="pointBlue">-1.000</output><br />
+          </fieldset>
+          <fieldset id="point4" class="pointYellow">
+            <legend>Point 4 (u=1, w=1) Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point4x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.00"
+            />
+            <output id="opPoint4x" class="pointYellow">-1.000</output><br />
+            y
+            <input
+              type="range"
+              id="point4y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.00"
+            />
+            <output id="opPoint4y" class="pointYellow">1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point4z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.00"
+            />
+            <output id="opPoint4z" class="pointYellow">1.000</output><br />
+          </fieldset>
+        </div>
+
+        <div id="utangents" class="tabcontent">
+          <fieldset id="point1u" class="pointRed">
+            <legend>U Tangent at Point 1 (u=0, w=0)</legend>
+            x
+            <input
+              type="range"
+              id="point1ux"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="0.20"
+            />
+            <output id="opPoint1ux" class="pointRed">0.200</output><br />
+            y
+            <input
+              type="range"
+              id="point1uy"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="0.30"
+            />
+            <output id="opPoint1uy" class="pointRed">0.300</output><br />
+            z
+            <input
+              type="range"
+              id="point1uz"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="0.60"
+            />
+            <output id="opPoint1uz" class="pointRed">0.600</output><br />
+          </fieldset>
+          <fieldset id="point2u" class="pointGreen">
+            <legend>U Tangent at Point 2 (u=0, w=1)</legend>
+            x
+            <input
+              type="range"
+              id="point2ux"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="3.0"
+            />
+            <output id="opPoint2ux" class="pointGreen">3.000</output><br />
+            y
+            <input
+              type="range"
+              id="point2uy"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="4.0"
+            />
+            <output id="opPoint2uy" class="pointGreen">4.000</output><br />
+            z
+            <input
+              type="range"
+              id="point2uz"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="0.0"
+            />
+            <output id="opPoint2uz" class="pointGreen">0.000</output><br />
+          </fieldset>
+          <fieldset id="point3u" class="pointBlue">
+            <legend>U Tangent at Point 3 (u=1, w=0)</legend>
+            x
+            <input
+              type="range"
+              id="point3ux"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.0"
+            />
+            <output id="opPoint3ux" class="pointBlue">0.00</output><br />
+            y
+            <input
+              type="range"
+              id="point3uy"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="3.0"
+            />
+            <output id="opPoint3uy" class="pointBlue">3.000</output><br />
+            z
+            <input
+              type="range"
+              id="point3uz"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="-2.7"
+            />
+            <output id="opPoint3uz" class="pointBlue">-2.700</output><br />
+          </fieldset>
+          <fieldset id="point4u">
+            <legend>U Tangent at Point 4 (u=1, w=1)</legend>
+            x
+            <input
+              type="range"
+              id="point4ux"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="1.0"
+            />
+            <output id="opPoint4ux" class="pointYellow">1.000</output><br />
+            y
+            <input
+              type="range"
+              id="point4uy"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="1.0"
+            />
+            <output id="opPoint4uy" class="pointYellow">1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point4uz"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="1.0"
+            />
+            <output id="opPoint4uz" class="pointYellow">1.000</output><br />
+          </fieldset>
+        </div>
+
+        <div id="wtangents" class="tabcontent">
+          <fieldset id="point1w" class="pointRed">
+            <legend>W Tangent at Point 1 (u=0, w=0)</legend>
+            x
+            <input
+              type="range"
+              id="point1wx"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint1wx" class="pointRed">-1.000</output><br />
+            y
+            <input
+              type="range"
+              id="point1wy"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint1wy" class="pointRed">-1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point1wz"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint1wz" class="pointRed">-1.000</output><br />
+          </fieldset>
+          <fieldset id="point2w" class="pointGreen">
+            <legend>W Tangent at Point 2 (u=0, w=1)</legend>
+            x
+            <input
+              type="range"
+              id="point2wx"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="0.0"
+            />
+            <output id="opPoint2wx" class="pointGreen">0.000</output><br />
+            y
+            <input
+              type="range"
+              id="point2wy"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint2wy" class="pointGreen">1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point2wz"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint2wz" class="pointGreen">1.000</output><br />
+          </fieldset>
+          <fieldset id="point3w" class="pointBlue">
+            <legend>W Tangent at Point 3 (u=1, w=0)</legend>
+            x
+            <input
+              type="range"
+              id="point3wx"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.5"
+            />
+            <output id="opPoint3wx" class="pointBlue">0.50</output><br />
+            y
+            <input
+              type="range"
+              id="point3wy"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.5"
+            />
+            <output id="opPoint3wy" class="pointBlue">0.500</output><br />
+            z
+            <input
+              type="range"
+              id="point3wz"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.7"
+            />
+            <output id="opPoint3wz" class="pointBlue">0.700</output><br />
+          </fieldset>
+          <fieldset id="point4w">
+            <legend>W Tangent at Point 4 (u=1, w=1)</legend>
+            x
+            <input
+              type="range"
+              id="point4wx"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.0"
+            />
+            <output id="opPoint4wx" class="pointYellow">0.000</output><br />
+            y
+            <input
+              type="range"
+              id="point4wy"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.0"
+            />
+            <output id="opPoint4wy" class="pointYellow">0.000</output><br />
+            z
+            <input
+              type="range"
+              id="point4wz"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="5.0"
+            />
+            <output id="opPoint4wz" class="pointYellow">5.000</output><br />
+          </fieldset>
+        </div>
+
+        <div id="uwtwists" class="tabcontent">
+          <fieldset id="point1uw" class="pointRed">
+            <legend>UW Twist at Point 1 (u=0, w=0)</legend>
+            x
+            <input
+              type="range"
+              id="point1uwx"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="0.5"
+            />
+            <output id="opPoint1uwx" class="pointRed">0.500</output><br />
+            y
+            <input
+              type="range"
+              id="point1uwy"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="0.0"
+            />
+            <output id="opPoint1uwy" class="pointRed">0.000</output><br />
+            z
+            <input
+              type="range"
+              id="point1uwz"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="0.6"
+            />
+            <output id="opPoint1uwz" class="pointRed">0.600</output><br />
+          </fieldset>
+          <fieldset id="point2uw" class="pointGreen">
+            <legend>UW Twist at Point 2 (u=0, w=1)</legend>
+            x
+            <input
+              type="range"
+              id="point2uwx"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="0.5"
+            />
+            <output id="opPoint2uwx" class="pointGreen">0.500</output><br />
+            y
+            <input
+              type="range"
+              id="point2uwy"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="0.2"
+            />
+            <output id="opPoint2uwy" class="pointGreen">0.200</output><br />
+            z
+            <input
+              type="range"
+              id="point2uwz"
+              min="-10.00"
+              max="10.00"
+              step="0.001"
+              value="-0.6"
+            />
+            <output id="opPoint2uwz" class="pointGreen">-0.600</output><br />
+          </fieldset>
+          <fieldset id="point3uw" class="pointBlue">
+            <legend>UW Twist at Point 3 (u=1, w=0)</legend>
+            x
+            <input
+              type="range"
+              id="point3uwx"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.0"
+            />
+            <output id="opPoint3uwx" class="pointBlue">0.000</output><br />
+            y
+            <input
+              type="range"
+              id="point3uwy"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.0"
+            />
+            <output id="opPoint3uwy" class="pointBlue">0.000</output><br />
+            z
+            <input
+              type="range"
+              id="point3uwz"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.0"
+            />
+            <output id="opPoint3uwz" class="pointBlue">0.000</output><br />
+          </fieldset>
+          <fieldset id="point4uw">
+            <legend>UW Twist at Point 4 (u=1, w=1)</legend>
+            x
+            <input
+              type="range"
+              id="point4uwx"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="-0.5"
+            />
+            <output id="opPoint4uwx" class="pointYellow">-0.500</output><br />
+            y
+            <input
+              type="range"
+              id="point4uwy"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="-0.5"
+            />
+            <output id="opPoint4uwy" class="pointYellow">-0.500</output><br />
+            z
+            <input
+              type="range"
+              id="point4uwz"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="-0.6"
+            />
+            <output id="opPoint4uwz" class="pointYellow">-0.600</output><br />
+          </fieldset>
+        </div>
+
+        <form>
+          Camera Angle
+          <input
+            type="range"
+            id="cameraAngle"
+            min="0.0"
+            max="360.0"
+            step="1"
+            value="25"
+          />
+          <output id="opCameraAngle">25</output><br />
+          <input type="checkbox" id="wireframe" /> Show Wireframe<br />
+          <fieldset>
+            <legend>Moving Point</legend>
+            u value
+            <input
+              type="range"
+              id="uValue"
+              min="0.0"
+              max="1.0"
+              step="0.001"
+              value=".5"
+            />
+            <output id="opUvalue">0.5</output><br />
+            w value
+            <input
+              type="range"
+              id="wValue"
+              min="0.0"
+              max="1.0"
+              step="0.001"
+              value=".6"
+            />
+            <output id="opWvalue">0.6</output>
+          </fieldset>
+        </form>
+      </div>
+      <div id="webglOp"></div>
+    </div>
+    <script src="../js/three.min.js"></script>
+    <script src="script2.js"></script>
+  </body>
+</html>

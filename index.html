@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Curves and Surfaces</title>
+  </head>
+  <body>
+    <div class="outerContainer">
+      <div id="topPanel" class="topContainer">
+        <h1>3D Curves and Surfaces in Geometric Design</h1>
+        <nav>
+          <table class="center">
+            <tr>
+              <td>
+                <a class="leftbtn" id="pcCurve" href="#one"
+                  >Parametric Cubic Curve
+                </a>
+              </td>
+              <td>
+                <a class="leftbtn" id="pcSurface" href="#two"
+                  >Bicubic Surface
+                </a>
+              </td>
+              <td>
+                <a class="leftbtn" id="bezCurve" href="#three">Bezier Curve </a>
+              </td>
+              <td>
+                <a class="leftbtn" id="bezSurface" href="#four"
+                  >Bezier Surface
+                </a>
+              </td>
+              <td>
+                <a class="leftbtn" id="splineCurve" href="#five"
+                  >NURBS Curve
+                </a>
+              </td>
+              <td>
+                <a class="leftbtn" id="splineSurface" href="#six"
+                  >NURBS Surface</a
+                >
+              </td>
+            </tr>
+          </table>
+        </nav>
+      </div>
+      <div id="bottomPanel" class="bottomContainer">
+        <div class="page" id="one">
+          <iframe src="p01CubicCurve/page1.html" name="targetframe"> </iframe>
+        </div>
+
+        <div class="page" id="two">
+          <iframe src="p02CubicSurface/page2.html" name="targetframe"> </iframe>
+        </div>
+
+        <div class="page" id="three">
+          <iframe src="p03BezierCurve/page3.html" name="targetframe"> </iframe>
+        </div>
+
+        <div class="page" id="four">
+          <iframe src="p04BezierSurface/page4.html" name="targetframe"> </iframe>
+        </div>
+
+        <div class="page" id="five">
+          <iframe src="p05NurbsCurve/page5.html" name="targetframe"> </iframe>
+        </div>
+
+        <div class="page" id="six">
+          <iframe src="p06NurbsSurface/page6.html" name="targetframe"> </iframe>
+        </div>
+      </div>
+    </div>
+    <script src="js/three.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      Array.from(document.querySelectorAll("a")).map((x) =>
+        x.addEventListener("click", function (e) {
+          Array.from(document.querySelectorAll("a")).map((x) =>
+            x.classList.remove("active")
+          );
+          e.target.classList.add("active");
+        })
+      );
+    </script>
+  </body>
+</html>

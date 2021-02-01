@@ -1,0 +1,165 @@
+.outerContainer {
+  display: grid;
+}
+
+#topPanel {
+  background: #333333;
+  min-height: 50px;
+}
+
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: lightgoldenrodyellow;
+  text-align: center;
+}
+
+#bottomPanel {
+  background: #666666;
+  height: calc(100vh - 135px);
+}
+
+.outerContainer > div {
+  border: 1px #ccc solid;
+  padding: 1px;
+}
+
+.leftbtn {
+  padding: 6px 18px 6px 16px;
+  margin-top: 0.25cm;
+  margin-bottom: 0.25cm;
+  color: lightgoldenrodyellow;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blue {
+  background: blue;
+}
+
+.magenta {
+  background: magenta;
+}
+
+iframe {
+  width: 100%;
+  height: calc(100vh - 135px);
+}
+
+.page {
+  width: 100%;
+  height: calc(100vh - 135px);
+  position: absolute;
+  overflow-y: auto;
+  z-index: 0;
+  background-color: #555555;
+  padding: 0em;
+}
+
+.page:target {
+  z-index: 1;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+}
+
+#leftPanel {
+  background: #292929;
+}
+
+.tablink1 {
+  background-color: #151515;
+  color: whitesmoke;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 2px 2px;
+  font-size: 17px;
+  width: 50%;
+}
+
+.tablink2 {
+  background-color: #151515;
+  color: whitesmoke;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 2px 2px;
+  font-size: 17px;
+  width: 25%;
+}
+
+#fourPoints {
+  background-color: #272727;
+}
+
+#hermite {
+  background-color: #222222;
+}
+
+button {
+  background-color: #050505;
+  color: whitesmoke;
+}
+
+.deg {
+  color: black;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.selected {
+  background-color: darkred;
+  color: #ffffff;
+}
+
+button {
+  background-color: darkslateblue;
+  color: whitesmoke;
+}
+
+#pointData,
+#pointLegend,
+#pointx,
+#pointy,
+#pointz,
+#pointw,
+#opPointx,
+#opPointy,
+#opPointz,
+#opPointw {
+  color: lightgoldenrodyellow;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 400px;
+  background-color: rgb(233, 202, 202);
+  color: rgb(18, 7, 56);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+#tablePointsBody {
+  height: 200px;
+  overflow-y: scroll;
+  display: block;
+}

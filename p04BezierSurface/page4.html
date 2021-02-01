@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="leftPanel">
+        <h1>Bezier 4 x 4 Surface</h1>
+
+        <button
+          class="tablink2"
+          onclick="openPage('line1', this, '#111111')"
+          id="defaultOpen"
+        >
+          Line 1
+        </button>
+        <button class="tablink2" onclick="openPage('line2', this, '#222222')">
+          Line 2
+        </button>
+        <button class="tablink2" onclick="openPage('line3', this, '#333333')">
+          Line 3
+        </button>
+        <button class="tablink2" onclick="openPage('line4', this, '#161616')">
+          Line 4
+        </button>
+
+        <div id="line1" class="tabcontent">
+          <fieldset id="point00" class="pointRed">
+            <legend class="pointRed">Point 00 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point00x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint00x" class="pointRed">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point00y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint00y" class="pointRed">-1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point00z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint00z" class="pointRed">-1.000</output><br />
+          </fieldset>
+          <fieldset id="point01" class="pointRed">
+            <legend class="pointRed">Point 01 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point01x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint01x" class="pointRed">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point01y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-0.3"
+            />
+            <output id="opPoint01y" class="pointRed">-0.300</output><br />
+            z
+            <input
+              type="range"
+              id="point01z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint01z" class="pointRed">-1.000</output><br />
+          </fieldset>
+          <fieldset id="point02" class="pointRed">
+            <legend class="pointRed">Point 02 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point02x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint02x" class="pointRed">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point02y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.3"
+            />
+            <output id="opPoint02y" class="pointRed">0.300</output><br />
+            z
+            <input
+              type="range"
+              id="point02z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint02z" class="pointRed">-1.000</output><br />
+          </fieldset>
+          <fieldset id="point03" class="pointRed">
+            <legend class="pointRed">Point 03 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point03x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.10"
+            />
+            <output id="opPoint03x" class="pointRed">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point03y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.00"
+            />
+            <output id="opPoint03y" class="pointRed">1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point03z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.00"
+            />
+            <output id="opPoint03z" class="pointRed">-1.000</output><br />
+          </fieldset>
+        </div>
+
+        <div id="line2" class="tabcontent">
+          <fieldset id="point10" class="pointGreen">
+            <legend class="pointGreen">Point 10 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point10x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint10x" class="pointGreen">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point10y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint10y" class="pointGreen">-1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point10z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-0.3"
+            />
+            <output id="opPoint10z" class="pointGreen">-0.300</output><br />
+          </fieldset>
+          <fieldset id="point11" class="pointGreen">
+            <legend class="pointGreen">Point 11 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point11x"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint11x" class="pointGreen">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point11y"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="-0.3"
+            />
+            <output id="opPoint11y" class="pointGreen">-0.300</output><br />
+            z
+            <input
+              type="range"
+              id="point11z"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="-0.3"
+            />
+            <output id="opPoint11z" class="pointGreen">-0.300</output><br />
+          </fieldset>
+          <fieldset id="point12" class="pointGreen">
+            <legend class="pointGreen">Point 12 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point12x"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint12x" class="pointGreen">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point12y"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="0.3"
+            />
+            <output id="opPoint12y" class="pointGreen">0.300</output><br />
+            z
+            <input
+              type="range"
+              id="point12z"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="-0.30"
+            />
+            <output id="opPoint12z" class="pointGreen">-0.300</output><br />
+          </fieldset>
+          <fieldset id="point13" class="pointGreen">
+            <legend class="pointGreen">Point 13 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point13x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.10"
+            />
+            <output id="opPoint13x" class="pointGreen">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point13y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.00"
+            />
+            <output id="opPoint13y" class="pointGreen">1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point13z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-0.30"
+            />
+            <output id="opPoint13z" class="pointGreen">-0.300</output><br />
+          </fieldset>
+        </div>
+
+        <div id="line3" class="tabcontent">
+          <fieldset id="point20" class="pointBlue">
+            <legend class="pointBlue">Point 20 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point20x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint20x" class="pointBlue">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point20y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint20y" class="pointBlue">-1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point20z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.3"
+            />
+            <output id="opPoint20z" class="pointBlue">0.300</output><br />
+          </fieldset>
+          <fieldset id="point21" class="pointBlue">
+            <legend class="pointBlue">Point 21 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point21x"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint21x" class="pointBlue">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point21y"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="-0.3"
+            />
+            <output id="opPoint21y" class="pointBlue">-0.300</output><br />
+            z
+            <input
+              type="range"
+              id="point21z"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="0.3"
+            />
+            <output id="opPoint21z" class="pointBlue">0.300</output><br />
+          </fieldset>
+          <fieldset id="point22" class="pointBlue">
+            <legend class="pointBlue">Point 22 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point22x"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint22x" class="pointBlue">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point22y"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="0.3"
+            />
+            <output id="opPoint22y" class="pointBlue">0.300</output><br />
+            z
+            <input
+              type="range"
+              id="point22z"
+              min="-3.00"
+              max="3.00"
+              step="0.001"
+              value="0.3"
+            />
+            <output id="opPoint22z" class="pointBlue">0.300</output><br />
+          </fieldset>
+          <fieldset id="point23" class="pointBlue">
+            <legend class="pointBlue">Point 23 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point23x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.10"
+            />
+            <output id="opPoint23x" class="pointBlue">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point23y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.00"
+            />
+            <output id="opPoint23y" class="pointBlue">1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point23z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.30"
+            />
+            <output id="opPoint23z" class="pointBlue">0.300</output><br />
+          </fieldset>
+        </div>
+
+        <div id="line4" class="tabcontent">
+          <fieldset id="point30" class="pointYellow">
+            <legend class="pointYellow">Point 30 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point30x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint30x" class="pointYellow">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point30y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint30y" class="pointYellow">-1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point30z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint30z" class="pointYellow">1.000</output><br />
+          </fieldset>
+          <fieldset id="point31" class="pointYellow">
+            <legend class="pointYellow">Point 31 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point31x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint31x" class="pointYellow">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point31y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-0.3"
+            />
+            <output id="opPoint31y" class="pointYellow">-0.300</output><br />
+            z
+            <input
+              type="range"
+              id="point31z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint31z" class="pointYellow">1.000</output><br />
+          </fieldset>
+          <fieldset id="point32" class="pointYellow">
+            <legend class="pointYellow">Point 32 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point32x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.1"
+            />
+            <output id="opPoint32x" class="pointYellow">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point32y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.3"
+            />
+            <output id="opPoint32y" class="pointYellow">0.300</output><br />
+            z
+            <input
+              type="range"
+              id="point32z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint32z" class="pointYellow">1.000</output><br />
+          </fieldset>
+          <fieldset id="point33" class="pointYellow">
+            <legend class="pointYellow">Point 33 Coordinates</legend>
+            x
+            <input
+              type="range"
+              id="point33x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.10"
+            />
+            <output id="opPoint33x" class="pointYellow">0.100</output><br />
+            y
+            <input
+              type="range"
+              id="point33y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.00"
+            />
+            <output id="opPoint33y" class="pointYellow">1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point33z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.00"
+            />
+            <output id="opPoint33z" class="pointYellow">1.000</output><br />
+          </fieldset>
+        </div>
+
+        <form>
+          Camera Angle
+          <input
+            type="range"
+            id="cameraAngle"
+            min="0.0"
+            max="360.0"
+            step="1"
+            value="25"
+          />
+          <output id="opCameraAngle">25</output><br />
+          <input type="checkbox" id="wireframe" /> Show Wireframe<br />
+          <fieldset>
+            <legend>Moving Point</legend>
+            u value
+            <input
+              type="range"
+              id="uValue"
+              min="0.0"
+              max="1.0"
+              step="0.001"
+              value=".5"
+            />
+            <output id="opUvalue">0.5</output><br />
+            w value
+            <input
+              type="range"
+              id="wValue"
+              min="0.0"
+              max="1.0"
+              step="0.001"
+              value=".6"
+            />
+            <output id="opWvalue">0.6</output>
+          </fieldset>
+        </form>
+      </div>
+      <div id="webglOp"></div>
+    </div>
+
+    <script src="../js/three.min.js"></script>
+    <script src="script4.js"></script>
+  </body>
+</html>

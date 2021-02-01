@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="leftPanel">
+        <h1>NURBS Surface</h1>
+        Degree of U Parameter
+        <select id="udegree" class="deg">
+          <option class="deg" value="1">1</option>
+          <option class="deg" value="2">2</option>
+          <option class="deg" value="3" selected>3</option>
+          <option class="deg" value="4">4</option>
+          <option class="deg" value="5">5</option>
+        </select>
+        <br />
+        Degree of W Parameter
+        <select id="wdegree" class="deg">
+          <option class="deg" value="1">1</option>
+          <option class="deg" value="2">2</option>
+          <option class="deg" value="3" selected>3</option>
+          <option class="deg" value="4">4</option>
+          <option class="deg" value="5">5</option>
+        </select>
+
+        <hr />
+
+        <table id="tablePoints">
+          <tbody id="tablePointsBody"></tbody>
+        </table>
+
+        <fieldset id="pointData">
+          <legend id="pointLegend">Point 1 Homogeneous Coordinates</legend>
+          x
+          <input
+            type="range"
+            id="pointx"
+            min="-1.00"
+            max="1.00"
+            step="0.001"
+            value="0.00"
+          />
+          <output id="opPointx">0.000</output><br />
+          y
+          <input
+            type="range"
+            id="pointy"
+            min="-1.00"
+            max="1.00"
+            step="0.001"
+            value="0.00"
+          />
+          <output id="opPointy">0.000</output><br />
+          z
+          <input
+            type="range"
+            id="pointz"
+            min="-1.00"
+            max="1.00"
+            step="0.001"
+            value="0.00"
+          />
+          <output id="opPointz">0.000</output><br />
+          h
+          <input
+            type="range"
+            id="pointw"
+            min="1.00"
+            max="10.00"
+            step="0.01"
+            value="1.00"
+          />
+          <output id="opPointw">1.000</output><br />
+        </fieldset>
+
+        <hr />
+        <form>
+          Camera Angle
+          <input
+            type="range"
+            id="cameraAngle"
+            min="0.0"
+            max="360.0"
+            step="1"
+            value="25"
+          />
+          <output id="opCameraAngle">25</output><br />
+          <input type="checkbox" id="wireframe" /> Show Wireframe<br />
+          Moving Point u value
+          <input
+            type="range"
+            id="uValue"
+            min="0.0"
+            max="1.0"
+            step="0.001"
+            value=".6"
+          />
+          <output id="opUvalue">0.6</output><br />
+          Moving Point w value
+          <input
+            type="range"
+            id="wValue"
+            min="0.0"
+            max="1.0"
+            step="0.001"
+            value=".45"
+          />
+          <output id="opWvalue">0.45</output><br />
+        </form>
+
+        <button id="knotU">Show Knot U Vector</button>
+        <button id="knotW">Show Knot W Vector</button>
+
+        <div class="tooltip">
+          Usage
+          <span class="tooltiptext"
+            >Select the U, W Degrees of the NURBS Surface. Edit a point by
+            clicking on the Edit button. Rotate the Camera by using the Camera
+            Angle slider. Modify the moving parameters point by using the u and
+            w value sliders. You can also view the Knot Vectors.
+          </span>
+        </div>
+      </div>
+      <div id="webglOp"></div>
+    </div>
+    <script src="../js/three.min.js"></script>
+    <script src="../js/nurbsHelper.js"></script>
+    <script src="script6.js"></script>
+  </body>
+</html>

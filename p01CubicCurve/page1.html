@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="leftPanel">
+        <h1>Parametric Cubic Curve</h1>
+
+        <button class="tablink1" onclick="openPage('hermite', this, '#5971AD')">
+          Hermite Form
+        </button>
+        <button
+          class="tablink1"
+          onclick="openPage('fourPoints', this, '#27408B')"
+          id="defaultOpen"
+        >
+          Four Points Form
+        </button>
+
+        <div id="fourPoints" class="tabcontent">
+          <fieldset id="point1">
+            <legend>Point 1 (u=0)</legend>
+            x
+            <input
+              type="range"
+              id="point1x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint1x">-1.000</output><br />
+            y
+            <input
+              type="range"
+              id="point1y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint1y">-1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point1z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint1z">-1.000</output><br />
+          </fieldset>
+          <fieldset id="point2">
+            <legend>Point 2 (u=1/3)</legend>
+            x
+            <input
+              type="range"
+              id="point2x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.9"
+            />
+            <output id="opPoint2x">0.900</output><br />
+            y
+            <input
+              type="range"
+              id="point2y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-0.2"
+            />
+            <output id="opPoint2y">-0.200</output><br />
+            z
+            <input
+              type="range"
+              id="point2z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-0.2"
+            />
+            <output id="opPoint2z">-0.200</output><br />
+          </fieldset>
+          <fieldset id="point3">
+            <legend>Point 3 (u=2/3)</legend>
+            x
+            <input
+              type="range"
+              id="point3x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.5"
+            />
+            <output id="opPoint3x">0.500</output><br />
+            y
+            <input
+              type="range"
+              id="point3y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.5"
+            />
+            <output id="opPoint3y">0.500</output><br />
+            z
+            <input
+              type="range"
+              id="point3z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="0.5"
+            />
+            <output id="opPoint3z">0.500</output><br />
+          </fieldset>
+          <fieldset id="point4">
+            <legend>Point 4 (u=1)</legend>
+            x
+            <input
+              type="range"
+              id="point4x"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.00"
+            />
+            <output id="opPoint4x">1.000</output><br />
+            y
+            <input
+              type="range"
+              id="point4y"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.00"
+            />
+            <output id="opPoint4y">1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point4z"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.00"
+            />
+            <output id="opPoint4z">1.000</output><br />
+          </fieldset>
+          <button id="bnFourLine1">Curve 1</button>
+          <button id="bnFourLine2">Curve 2</button>
+          <button id="bnFourLine3">Curve 3</button>
+        </div>
+
+        <div id="hermite" class="tabcontent">
+          <fieldset id="point1h">
+            <legend>Point 1 (u=0)</legend>
+            x
+            <input
+              type="range"
+              id="point1xh"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint1xh">-1.000</output><br />
+            y
+            <input
+              type="range"
+              id="point1yh"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint1yh">-1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point1zh"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="-1.0"
+            />
+            <output id="opPoint1zh">-1.000</output><br />
+          </fieldset>
+          <fieldset id="point2h">
+            <legend>Point 2 (u=1)</legend>
+            x
+            <input
+              type="range"
+              id="point2xh"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint2xh">1.000</output><br />
+            y
+            <input
+              type="range"
+              id="point2yh"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint2yh">1.000</output><br />
+            z
+            <input
+              type="range"
+              id="point2zh"
+              min="-1.00"
+              max="1.00"
+              step="0.001"
+              value="1.0"
+            />
+            <output id="opPoint2zh">1.000</output><br />
+          </fieldset>
+          <fieldset id="point1dh">
+            <legend>Point 1 Tangent (u=0)</legend>
+            x
+            <input
+              type="range"
+              id="point1dxh"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.0"
+            />
+            <output id="opPoint1dxh">0.00</output><br />
+            y
+            <input
+              type="range"
+              id="point1dyh"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="7.5"
+            />
+            <output id="opPoint1dyh">7.500</output><br />
+            z
+            <input
+              type="range"
+              id="point1dzh"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="-0.5"
+            />
+            <output id="opPoint1dzh">-0.500</output><br />
+          </fieldset>
+          <fieldset id="point2dh">
+            <legend>Point 2 Tangent (u=1)</legend>
+            x
+            <input
+              type="range"
+              id="point2dxh"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.5"
+            />
+            <output id="opPoint2dxh">0.500</output><br />
+            y
+            <input
+              type="range"
+              id="point2dyh"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="9.5"
+            />
+            <output id="opPoint2dyh">9.500</output><br />
+            z
+            <input
+              type="range"
+              id="point2dzh"
+              min="-10.00"
+              max="10.00"
+              step="0.01"
+              value="0.5"
+            />
+            <output id="opPoint2dzh">0.500</output><br />
+          </fieldset>
+          <button id="bnHermiteLine1">Curve 1</button>
+          <button id="bnHermiteLine2">Curve 2</button>
+          <button id="bnHermiteLine3">Curve 3</button>
+          <button id="bnHermiteLine4">Curve 4</button>
+        </div>
+
+        <form>
+          Camera Angle
+          <input
+            type="range"
+            id="cameraAngle"
+            min="0.0"
+            max="360.0"
+            step="1"
+            value="25"
+          />
+          <output id="opCameraAngle">25</output><br />
+          u value
+          <input
+            type="range"
+            id="uValue"
+            min="0.0"
+            max="1.0"
+            step="0.01"
+            value=".25"
+          />
+          <output id="opUvalue">0.25</output>
+        </form>
+      </div>
+      <div id="webglOp"></div>
+    </div>
+    <script src="../js/three.min.js"></script>
+    <script src="script1.js"></script>
+  </body>
+</html>
