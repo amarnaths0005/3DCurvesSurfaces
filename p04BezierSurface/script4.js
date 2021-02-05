@@ -760,6 +760,38 @@ function init() {
   let directionalLight = new THREE.DirectionalLight(0xffffff, 0.65);
   scene.add(directionalLight);
 
+  document.getElementById("bnSurface1").addEventListener(
+    "click",
+    function () {
+      setupSurface1();
+    },
+    false
+  );
+
+  document.getElementById("bnSurface2").addEventListener(
+    "click",
+    function () {
+      setupSurface2();
+    },
+    false
+  );
+
+  document.getElementById("bnSurface3").addEventListener(
+    "click",
+    function () {
+      setupSurface3();
+    },
+    false
+  );
+
+  document.getElementById("bnSurface4").addEventListener(
+    "click",
+    function () {
+      setupSurface4();
+    },
+    false
+  );
+
   setupCubePoints();
   setupWireframeBox();
   handleCameraAngle();
@@ -774,7 +806,7 @@ function init() {
 }
 
 function initializeValues() {
-  p00x = 0.1;
+  p00x = 1.0;
   p00y = -1.0;
   p00z = -1.0;
   p01x = 0.1;
@@ -783,7 +815,7 @@ function initializeValues() {
   p02x = 0.1;
   p02y = 0.3;
   p02z = -1.0;
-  p03x = 0.1;
+  p03x = -1.0;
   p03y = 1.0;
   p03z = -1.0;
 
@@ -813,7 +845,7 @@ function initializeValues() {
   p23y = 1.0;
   p23z = 0.3;
 
-  p30x = 0.1;
+  p30x = -1.0;
   p30y = -1.0;
   p30z = 1.0;
   p31x = 0.1;
@@ -822,7 +854,7 @@ function initializeValues() {
   p32x = 0.1;
   p32y = 0.3;
   p32z = 1.0;
-  p33x = 0.1;
+  p33x = 1.0;
   p33y = 1.0;
   p33z = 1.0;
 
@@ -830,6 +862,340 @@ function initializeValues() {
   wValue = 0.6;
 
   step = 1.0 / noDivisions;
+}
+
+function setupSurface1() {
+  p00x = 1.0;
+  p00y = -1.0;
+  p00z = -1.0;
+  p01x = 0.1;
+  p01y = -0.3;
+  p01z = -1.0;
+  p02x = 0.1;
+  p02y = 0.3;
+  p02z = -1.0;
+  p03x = 1.0;
+  p03y = 1.0;
+  p03z = -1.0;
+
+  p10x = -1;
+  p10y = -1.0;
+  p10z = -0.3;
+  p11x = -3.0;
+  p11y = -0.3;
+  p11z = -0.3;
+  p12x = -3.0;
+  p12y = 0.3;
+  p12z = -0.3;
+  p13x = -1.0;
+  p13y = 1.0;
+  p13z = -0.3;
+
+  p20x = -1.0;
+  p20y = -1.0;
+  p20z = 0.3;
+  p21x = -3.0;
+  p21y = -0.3;
+  p21z = 0.3;
+  p22x = -3.0;
+  p22y = 0.3;
+  p22z = 0.3;
+  p23x = -1.0;
+  p23y = 1.0;
+  p23z = 0.3;
+
+  p30x = 1.0;
+  p30y = -1.0;
+  p30z = 1.0;
+  p31x = 0.1;
+  p31y = -0.3;
+  p31z = 1.0;
+  p32x = 0.1;
+  p32y = 0.3;
+  p32z = 1.0;
+  p33x = 1.0;
+  p33y = 1.0;
+  p33z = 1.0;
+
+  updateOutputLabels();
+  computeBezierSurface();
+}
+
+function setupSurface2() {
+  p00x = 1.0;
+  p00y = 0.0;
+  p00z = -1.0;
+  p01x = 0.1;
+  p01y = -0.3;
+  p01z = -1.0;
+  p02x = 0.1;
+  p02y = 0.3;
+  p02z = -1.0;
+  p03x = -1.0;
+  p03y = 0.0;
+  p03z = -1.0;
+
+  p10x = 0.1;
+  p10y = -1.0;
+  p10z = -0.3;
+  p11x = 0.1;
+  p11y = -0.3;
+  p11z = -0.3;
+  p12x = 0.1;
+  p12y = 0.3;
+  p12z = -0.3;
+  p13x = 0.1;
+  p13y = 1.0;
+  p13z = -0.3;
+
+  p20x = 0.1;
+  p20y = -1.0;
+  p20z = 0.3;
+  p21x = 0.1;
+  p21y = -0.3;
+  p21z = 0.3;
+  p22x = 0.1;
+  p22y = 0.3;
+  p22z = 0.3;
+  p23x = 0.1;
+  p23y = 1.0;
+  p23z = 0.3;
+
+  p30x = 1.0;
+  p30y = 0.0;
+  p30z = 1.0;
+  p31x = 0.1;
+  p31y = -0.3;
+  p31z = 1.0;
+  p32x = 0.1;
+  p32y = 0.3;
+  p32z = 1.0;
+  p33x = -1.0;
+  p33y = 0.0;
+  p33z = 1.0;
+
+  updateOutputLabels();
+  computeBezierSurface();
+}
+
+function setupSurface3() {
+  p00x = 1.0;
+  p00y = 0.0;
+  p00z = -1.0;
+  p01x = 0.0;
+  p01y = 0.0;
+  p01z = -1.0;
+  p02x = 0.0;
+  p02y = 0.0;
+  p02z = -1.0;
+  p03x = -1.0;
+  p03y = 0.0;
+  p03z = -1.0;
+
+  p10x = 1.0;
+  p10y = 0.0;
+  p10z = 0.0;
+  p11x = 0.0;
+  p11y = 2.0;
+  p11z = 0.0;
+  p12x = 0.0;
+  p12y = 2.0;
+  p12z = 0.0;
+  p13x = -1.0;
+  p13y = 0.0;
+  p13z = 0.0;
+
+  p20x = 1.0;
+  p20y = 0.0;
+  p20z = 0.0;
+  p21x = 1.0;
+  p21y = -2.0;
+  p21z = 0.0;
+  p22x = 1.0;
+  p22y = -2.0;
+  p22z = 0.0;
+  p23x = -1.0;
+  p23y = 0.0;
+  p23z = 0.0;
+
+  p30x = 1.0;
+  p30y = 0.0;
+  p30z = 1.0;
+  p31x = 0.0;
+  p31y = 0.0;
+  p31z = 1.0;
+  p32x = 0.0;
+  p32y = 0.0;
+  p32z = 1.0;
+  p33x = -1.0;
+  p33y = 0.0;
+  p33z = 1.0;
+
+  updateOutputLabels();
+  computeBezierSurface();
+}
+
+function setupSurface4() {
+  p00x = 1.0;
+  p00y = 0.0;
+  p00z = -1.0;
+  p01x = 0.0;
+  p01y = 0.0;
+  p01z = -1.0;
+  p02x = 0.0;
+  p02y = 0.0;
+  p02z = -1.0;
+  p03x = -1.0;
+  p03y = 0.0;
+  p03z = -1.0;
+
+  p10x = 1.0;
+  p10y = 0.0;
+  p10z = 0.0;
+  p11x = 0.0;
+  p11y = 2.0;
+  p11z = 0.0;
+  p12x = 0.0;
+  p12y = 2.0;
+  p12z = 0.0;
+  p13x = -1.0;
+  p13y = 0.0;
+  p13z = 0.0;
+
+  p20x = 1.0;
+  p20y = 0.0;
+  p20z = 0.0;
+  p21x = 0.0;
+  p21y = 2.0;
+  p21z = 0.0;
+  p22x = 0.0;
+  p22y = 2.0;
+  p22z = 0.0;
+  p23x = -1.0;
+  p23y = 0.0;
+  p23z = 0.0;
+
+  p30x = 1.0;
+  p30y = 0.0;
+  p30z = 1.0;
+  p31x = 0.0;
+  p31y = 0.0;
+  p31z = 1.0;
+  p32x = 0.0;
+  p32y = 0.0;
+  p32z = 1.0;
+  p33x = -1.0;
+  p33y = 0.0;
+  p33z = 1.0;
+
+  updateOutputLabels();
+  computeBezierSurface();
+}
+
+function updateOutputLabels() {
+  p00xRange.value = p00x;
+  p00yRange.value = p00y;
+  p00zRange.value = p00z;
+  p01xRange.value = p01x;
+  p01yRange.value = p01y;
+  p01zRange.value = p01z;
+  p02xRange.value = p02x;
+  p02yRange.value = p02y;
+  p02zRange.value = p02z;
+  p03xRange.value = p03x;
+  p03yRange.value = p03y;
+  p03zRange.value = p03z;
+
+  p10xRange.value = p10x;
+  p10yRange.value = p10y;
+  p10zRange.value = p10z;
+  p11xRange.value = p11x;
+  p11yRange.value = p11y;
+  p11zRange.value = p11z;
+  p12xRange.value = p12x;
+  p12yRange.value = p12y;
+  p12zRange.value = p12z;
+  p13xRange.value = p13x;
+  p13yRange.value = p13y;
+  p13zRange.value = p13z;
+
+  p20xRange.value = p20x;
+  p20yRange.value = p20y;
+  p20zRange.value = p20z;
+  p21xRange.value = p21x;
+  p21yRange.value = p21y;
+  p21zRange.value = p21z;
+  p22xRange.value = p22x;
+  p22yRange.value = p22y;
+  p22zRange.value = p22z;
+  p23xRange.value = p23x;
+  p23yRange.value = p23y;
+  p23zRange.value = p23z;
+
+  p30xRange.value = p30x;
+  p30yRange.value = p30y;
+  p30zRange.value = p30z;
+  p31xRange.value = p31x;
+  p31yRange.value = p31y;
+  p31zRange.value = p31z;
+  p32xRange.value = p32x;
+  p32yRange.value = p32y;
+  p32zRange.value = p32z;
+  p33xRange.value = p33x;
+  p33yRange.value = p33y;
+  p33zRange.value = p33z;
+
+  document.getElementById("opPoint00x").textContent = p00x.toFixed(3);
+  document.getElementById("opPoint01x").textContent = p01x.toFixed(3);
+  document.getElementById("opPoint02x").textContent = p02x.toFixed(3);
+  document.getElementById("opPoint03x").textContent = p03x.toFixed(3);
+  document.getElementById("opPoint00y").textContent = p00y.toFixed(3);
+  document.getElementById("opPoint01y").textContent = p01y.toFixed(3);
+  document.getElementById("opPoint02y").textContent = p02y.toFixed(3);
+  document.getElementById("opPoint03y").textContent = p03y.toFixed(3);
+  document.getElementById("opPoint00z").textContent = p00z.toFixed(3);
+  document.getElementById("opPoint01z").textContent = p01z.toFixed(3);
+  document.getElementById("opPoint02z").textContent = p02z.toFixed(3);
+  document.getElementById("opPoint03z").textContent = p03z.toFixed(3);
+
+  document.getElementById("opPoint10x").textContent = p10x.toFixed(3);
+  document.getElementById("opPoint11x").textContent = p11x.toFixed(3);
+  document.getElementById("opPoint12x").textContent = p12x.toFixed(3);
+  document.getElementById("opPoint13x").textContent = p13x.toFixed(3);
+  document.getElementById("opPoint10y").textContent = p10y.toFixed(3);
+  document.getElementById("opPoint11y").textContent = p11y.toFixed(3);
+  document.getElementById("opPoint12y").textContent = p12y.toFixed(3);
+  document.getElementById("opPoint13y").textContent = p13y.toFixed(3);
+  document.getElementById("opPoint10z").textContent = p10z.toFixed(3);
+  document.getElementById("opPoint11z").textContent = p11z.toFixed(3);
+  document.getElementById("opPoint12z").textContent = p12z.toFixed(3);
+  document.getElementById("opPoint13z").textContent = p13z.toFixed(3);
+
+  document.getElementById("opPoint20x").textContent = p20x.toFixed(3);
+  document.getElementById("opPoint21x").textContent = p21x.toFixed(3);
+  document.getElementById("opPoint22x").textContent = p22x.toFixed(3);
+  document.getElementById("opPoint23x").textContent = p23x.toFixed(3);
+  document.getElementById("opPoint20y").textContent = p20y.toFixed(3);
+  document.getElementById("opPoint21y").textContent = p21y.toFixed(3);
+  document.getElementById("opPoint22y").textContent = p22y.toFixed(3);
+  document.getElementById("opPoint23y").textContent = p23y.toFixed(3);
+  document.getElementById("opPoint20z").textContent = p20z.toFixed(3);
+  document.getElementById("opPoint21z").textContent = p21z.toFixed(3);
+  document.getElementById("opPoint22z").textContent = p22z.toFixed(3);
+  document.getElementById("opPoint23z").textContent = p23z.toFixed(3);
+
+  document.getElementById("opPoint30x").textContent = p30x.toFixed(3);
+  document.getElementById("opPoint31x").textContent = p31x.toFixed(3);
+  document.getElementById("opPoint32x").textContent = p32x.toFixed(3);
+  document.getElementById("opPoint33x").textContent = p33x.toFixed(3);
+  document.getElementById("opPoint30y").textContent = p30y.toFixed(3);
+  document.getElementById("opPoint31y").textContent = p31y.toFixed(3);
+  document.getElementById("opPoint32y").textContent = p32y.toFixed(3);
+  document.getElementById("opPoint33y").textContent = p33y.toFixed(3);
+  document.getElementById("opPoint30z").textContent = p30z.toFixed(3);
+  document.getElementById("opPoint31z").textContent = p31z.toFixed(3);
+  document.getElementById("opPoint32z").textContent = p32z.toFixed(3);
+  document.getElementById("opPoint33z").textContent = p33z.toFixed(3);
 }
 
 function handleWireframe() {
@@ -1375,56 +1741,6 @@ function computeBezierSurface() {
   handleUWValue();
 }
 
-/*
-function renderBezierSurface() {
-  scene.remove(surfaceMesh);
-  scene.remove(lineWire);
-
-  let material = new THREE.MeshPhongMaterial({
-    side: THREE.DoubleSide,
-    color: 0xff00ff,
-    specular: 0x050505,
-    shininess: 100,
-    emissive: 0x111111,
-  });
-
-  let materialLine = new THREE.LineBasicMaterial({
-    color: 0xff00ff,
-  });
-
-  let geometry = new THREE.Geometry();
-  for (let i = 0; i < surfacePoints.length; ++i) {
-    geometry.vertices.push(surfacePoints[i]);
-  }
-
-  let index1, index2, index3, index4, index5, index6;
-
-  for (let j = 0; j < noDivisions; ++j) {
-    for (let i = 0; i < noDivisions; ++i) {
-      index1 = (noDivisions + 1) * i + j;
-      index2 = index1 + 1;
-      index3 = index1 + noDivisions + 1;
-      index4 = index2;
-      index5 = index3;
-      index6 = index5 + 1;
-      geometry.faces.push(new THREE.Face3(index1, index2, index3));
-      geometry.faces.push(new THREE.Face3(index4, index6, index5));
-    }
-  }
-
-  geometry.computeFaceNormals();
-  geometry.computeVertexNormals();
-  if (document.getElementById("wireframe").checked === true) {
-    let surfaceWire = new THREE.WireframeGeometry(geometry);
-    lineWire = new THREE.LineSegments(surfaceWire, materialLine);
-    scene.add(lineWire);
-  } else {
-    surfaceMesh = new THREE.Mesh(geometry, material);
-    scene.add(surfaceMesh);
-  }
-  render();
-} */
-
 function disposeArray() {
   this.array = null;
 }
@@ -1435,7 +1751,7 @@ function renderSurface() {
 
   let material = new THREE.MeshPhongMaterial({
     side: THREE.DoubleSide,
-    color: 0xff00ff,
+    color: 0x00ffff,
     specular: 0x050505,
     shininess: 250,
     emissive: 0x111111,
@@ -1458,7 +1774,7 @@ function renderSurface() {
   });
 
   let materialLine = new THREE.LineBasicMaterial({
-    color: 0xff00ff,
+    color: 0x00ffff,
   });
 
   let geometry = new THREE.BufferGeometry();
@@ -1582,7 +1898,7 @@ function handleCameraAngle() {
   let angle = (cameraAngle * Math.PI) / 180.0;
   let xCam = camRadius * Math.cos(angle);
   let zCam = camRadius * Math.sin(angle);
-  camera.position.set(xCam, 4, zCam);
+  camera.position.set(xCam, 3, zCam);
   camera.lookAt(scene.position);
   render();
 }
