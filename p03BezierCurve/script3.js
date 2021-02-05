@@ -63,26 +63,8 @@ function init() {
 
   cameraAngle = 25; // degrees
 
-  // Initialize points for the Four Point Form
-  p1x = -1.0;
-  p1y = -1.0;
-  p1z = -1.0;
-
-  p2x = -2.0;
-  p2y = -0.6;
-  p2z = -0.6;
-
-  p3x = 1.3;
-  p3y = 0.0;
-  p3z = 0.0;
-
-  p4x = 0.5;
-  p4y = -2.0;
-  p4z = 0.5;
-
-  p5x = 1.0;
-  p5y = 1.0;
-  p5z = 1.0;
+  // Initialize points for the Five Point Form
+  initializePoints();
 
   uVal = 0.25;
 
@@ -325,6 +307,30 @@ function init() {
   );
   scene.add(arrowHelper3);
 
+  document.getElementById("bnBezCurve1").addEventListener(
+    "click",
+    function () {
+      setupCurve1();
+    },
+    false
+  );
+
+  document.getElementById("bnBezCurve2").addEventListener(
+    "click",
+    function () {
+      setupCurve2();
+    },
+    false
+  );
+
+  document.getElementById("bnBezCurve3").addEventListener(
+    "click",
+    function () {
+      setupCurve3();
+    },
+    false
+  );
+
   setupCubePoints();
   setupBoundaryPoints();
   setupWireframeBox();
@@ -335,6 +341,152 @@ function init() {
 
   animate();
   render();
+}
+
+function initializePoints() {
+  p1x = -1.0;
+  p1y = -1.0;
+  p1z = -1.0;
+
+  p2x = -2.0;
+  p2y = -0.6;
+  p2z = -0.6;
+
+  p3x = 1.3;
+  p3y = 0.0;
+  p3z = 0.0;
+
+  p4x = 0.5;
+  p4y = -2.0;
+  p4z = 0.5;
+
+  p5x = 1.0;
+  p5y = 1.0;
+  p5z = 1.0;
+}
+
+function setupCurve1() {
+  p1x = -1.0;
+  p1y = -1.0;
+  p1z = -1.0;
+
+  p5x = 1.0;
+  p5y = 1.0;
+  p5z = 1.0;
+
+  let diffX = p5x - p1x;
+  let diffY = p5y - p1y;
+  let diffZ = p5z - p1z;
+
+  p2x = p1x + diffX / 4;
+  p2y = p1y + diffY / 4;
+  p2z = p1z + diffZ / 4;
+
+  p3x = p1x + diffX / 2;
+  p3y = p1y + diffY / 2;
+  p3z = p1z + diffZ / 2;
+
+  p4x = p1x + (diffX * 3) / 4;
+  p4y = p1y + (diffY * 3) / 4;
+  p4z = p1z + (diffZ * 3) / 4;
+
+  updateOutputLabels();
+  computeBezierCurve();
+  renderCurve();
+}
+
+function setupCurve2() {
+  p1x = 1.0;
+  p1y = -1.0;
+  p1z = -1.0;
+
+  p2x = 0.0;
+  p2y = 0.0;
+  p2z = -1.0;
+
+  p3x = -1.0;
+  p3y = 0.0;
+  p3z = 0.0;
+
+  p4x = 0.0;
+  p4y = 0.0;
+  p4z = 1.0;
+
+  p5x = 1.0;
+  p5y = 1.0;
+  p5z = 1.0;
+
+  updateOutputLabels();
+  computeBezierCurve();
+  renderCurve();
+}
+
+function setupCurve3() {
+  p1x = 1.0;
+  p1y = -1.0;
+  p1z = -1.0;
+
+  p2x = 1.0;
+  p2y = 0.9;
+  p2z = -1.0;
+
+  p3x = -1.0;
+  p3y = 0.9;
+  p3z = -1.0;
+
+  p4x = -1.0;
+  p4y = 0.9;
+  p4z = 1.0;
+
+  p5x = 1.0;
+  p5y = 1.0;
+  p5z = 1.0;
+
+  updateOutputLabels();
+  computeBezierCurve();
+  renderCurve();
+}
+
+function updateOutputLabels() {
+  p1xRange.value = p1x;
+  p1yRange.value = p1y;
+  p1zRange.value = p1z;
+
+  p2xRange.value = p2x;
+  p2yRange.value = p2y;
+  p2zRange.value = p2z;
+
+  p3xRange.value = p3x;
+  p3yRange.value = p3y;
+  p3zRange.value = p3z;
+
+  p4xRange.value = p4x;
+  p4yRange.value = p4y;
+  p4zRange.value = p4z;
+
+  p5xRange.value = p5x;
+  p5yRange.value = p5y;
+  p5zRange.value = p5z;
+
+  document.getElementById("opPoint1x").textContent = p1x.toFixed(3);
+  document.getElementById("opPoint1y").textContent = p1y.toFixed(3);
+  document.getElementById("opPoint1z").textContent = p1z.toFixed(3);
+
+  document.getElementById("opPoint2x").textContent = p2x.toFixed(3);
+  document.getElementById("opPoint2y").textContent = p2y.toFixed(3);
+  document.getElementById("opPoint2z").textContent = p2z.toFixed(3);
+
+  document.getElementById("opPoint3x").textContent = p3x.toFixed(3);
+  document.getElementById("opPoint3y").textContent = p3y.toFixed(3);
+  document.getElementById("opPoint3z").textContent = p3z.toFixed(3);
+
+  document.getElementById("opPoint4x").textContent = p4x.toFixed(3);
+  document.getElementById("opPoint4y").textContent = p4y.toFixed(3);
+  document.getElementById("opPoint4z").textContent = p4z.toFixed(3);
+
+  document.getElementById("opPoint5x").textContent = p5x.toFixed(3);
+  document.getElementById("opPoint5y").textContent = p5y.toFixed(3);
+  document.getElementById("opPoint5z").textContent = p5z.toFixed(3);
 }
 
 function changeUvalue() {
@@ -485,7 +637,7 @@ function computeBezierCurve() {
 function renderCurve() {
   scene.remove(curveLine);
   let material = new THREE.LineBasicMaterial({
-    color: 0xff00ff,
+    color: 0x00ffff,
     linewidth: 3, // For some reason, this line width does not work
   });
   let geometry = new THREE.BufferGeometry();
@@ -537,7 +689,6 @@ function setupBoundaryPoints() {
     sphere.position.z = points[i].z;
     spheres.push(sphere);
   }
-  //console.log(spheres.length);
 
   for (let i = 0; i < spheres.length; ++i) {
     scene.add(spheres[i]);
@@ -637,7 +788,7 @@ function handleCameraAngle() {
   let angle = (cameraAngle * Math.PI) / 180.0;
   let xCam = camRadius * Math.cos(angle);
   let zCam = camRadius * Math.sin(angle);
-  camera.position.set(xCam, 4, zCam);
+  camera.position.set(xCam, 3, zCam);
   camera.lookAt(scene.position);
   render();
 }
