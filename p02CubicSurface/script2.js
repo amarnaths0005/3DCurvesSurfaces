@@ -74,7 +74,6 @@ let arrowDirection3 = new THREE.Vector3();
 let points = [];
 let spheres = [];
 let surfacePoints = [];
-//let positions = [];
 let noDivisions = 50;
 let step, width;
 let surfaceMesh, lineWire;
@@ -725,6 +724,46 @@ function init() {
     false
   );
 
+  document.getElementById("bnSurface1").addEventListener(
+    "click",
+    function () {
+      setupSurface1();
+    },
+    false
+  );
+
+  document.getElementById("bnSurface2").addEventListener(
+    "click",
+    function () {
+      setupSurface2();
+    },
+    false
+  );
+
+  document.getElementById("bnSurface3").addEventListener(
+    "click",
+    function () {
+      setupSurface3();
+    },
+    false
+  );
+
+  document.getElementById("bnSurface4").addEventListener(
+    "click",
+    function () {
+      setupSurface4();
+    },
+    false
+  );
+
+  document.getElementById("bnSurface5").addEventListener(
+    "click",
+    function () {
+      setupSurface5();
+    },
+    false
+  );
+
   halfCubeSide = 1;
 
   renderer.setClearColor(new THREE.Color(0x111111));
@@ -786,6 +825,419 @@ function init() {
 
   animate();
   render();
+}
+
+function setupSurface1() {
+  p1x = 1.0;
+  p1y = -1.0;
+  p1z = -1.0;
+  p2x = 1.0;
+  p2y = -1.0;
+  p2z = 1.0;
+  p3x = -1.0;
+  p3y = 1.0;
+  p3z = -1.0;
+  p4x = -1.0;
+  p4y = 1.0;
+  p4z = 1.0;
+
+  p1ux = 0.0;
+  p1uy = 0.0;
+  p1uz = 0.0;
+  p2ux = 0.0;
+  p2uy = 0.0;
+  p2uz = 0.0;
+  p3ux = 0.0;
+  p3uy = 0.0;
+  p3uz = 0.0;
+  p4ux = 0.0;
+  p4uy = 0.0;
+  p4uz = 0.0;
+
+  p1wx = 0.0;
+  p1wy = 0.0;
+  p1wz = 0.0;
+  p2wx = 0.0;
+  p2wy = 0.0;
+  p2wz = 0.0;
+  p3wx = 0.0;
+  p3wy = 0.0;
+  p3wz = 0.0;
+  p4wx = 0.0;
+  p4wy = 0.0;
+  p4wz = 0.0;
+
+  p1uwx = 0.0;
+  p1uwy = 0.0;
+  p1uwz = 0.0;
+  p2uwx = 0.0;
+  p2uwy = 0.0;
+  p2uwz = 0.0;
+  p3uwx = 0.0;
+  p3uwy = 0.0;
+  p3uwz = 0.0;
+  p4uwx = 0.0;
+  p4uwy = 0.0;
+  p4uwz = 0.0;
+
+  uValue = 0.5;
+  wValue = 0.6;
+  updateOutputLabels();
+  computeCoonsBicubicSurface();
+}
+
+function setupSurface2() {
+  p1x = 0.0;
+  p1y = -1.0;
+  p1z = -1.0;
+  p2x = 0.0;
+  p2y = -1.0;
+  p2z = 1.0;
+  p3x = -0.5;
+  p3y = 1.0;
+  p3z = -1.0;
+  p4x = -0.5;
+  p4y = 1.0;
+  p4z = 1.0;
+
+  p1ux = 3.0;
+  p1uy = 0.0;
+  p1uz = 0.0;
+  p2ux = 3.0;
+  p2uy = 0.0;
+  p2uz = 0.0;
+  p3ux = 3.0;
+  p3uy = 0.0;
+  p3uz = 0.0;
+  p4ux = 3.0;
+  p4uy = 0.0;
+  p4uz = 0.0;
+
+  p1wx = 0.0;
+  p1wy = 0.0;
+  p1wz = 0.0;
+  p2wx = 0.0;
+  p2wy = 0.0;
+  p2wz = 0.0;
+  p3wx = 0.0;
+  p3wy = 0.0;
+  p3wz = 0.0;
+  p4wx = 0.0;
+  p4wy = 0.0;
+  p4wz = 0.0;
+
+  p1uwx = 0.0;
+  p1uwy = 0.0;
+  p1uwz = 0.0;
+  p2uwx = 0.0;
+  p2uwy = 0.0;
+  p2uwz = 0.0;
+  p3uwx = 0.0;
+  p3uwy = 0.0;
+  p3uwz = 0.0;
+  p4uwx = 0.0;
+  p4uwy = 0.0;
+  p4uwz = 0.0;
+
+  uValue = 0.5;
+  wValue = 0.6;
+  updateOutputLabels();
+  computeCoonsBicubicSurface();
+}
+
+function setupSurface3() {
+  p1x = 0.0;
+  p1y = -1.0;
+  p1z = -1.0;
+  p2x = 0.0;
+  p2y = -1.0;
+  p2z = 1.0;
+  p3x = 0.0;
+  p3y = 1.0;
+  p3z = -0.5;
+  p4x = 0.0;
+  p4y = 1.0;
+  p4z = 0.5;
+
+  p1ux = 3.0;
+  p1uy = 0.0;
+  p1uz = 0.0;
+  p2ux = 3.0;
+  p2uy = 0.0;
+  p2uz = 0.0;
+  p3ux = -3.0;
+  p3uy = 0.0;
+  p3uz = 0.0;
+  p4ux = -3.0;
+  p4uy = 0.0;
+  p4uz = 0.0;
+
+  p1wx = 0.0;
+  p1wy = 0.0;
+  p1wz = 0.0;
+  p2wx = 0.0;
+  p2wy = 0.0;
+  p2wz = 0.0;
+  p3wx = 0.0;
+  p3wy = 0.0;
+  p3wz = 0.0;
+  p4wx = 0.0;
+  p4wy = 0.0;
+  p4wz = 0.0;
+
+  p1uwx = 0.0;
+  p1uwy = 0.0;
+  p1uwz = 0.0;
+  p2uwx = 0.0;
+  p2uwy = 0.0;
+  p2uwz = 0.0;
+  p3uwx = 0.0;
+  p3uwy = 0.0;
+  p3uwz = 0.0;
+  p4uwx = 0.0;
+  p4uwy = 0.0;
+  p4uwz = 0.0;
+
+  uValue = 0.5;
+  wValue = 0.6;
+  updateOutputLabels();
+  computeCoonsBicubicSurface();
+}
+
+function setupSurface4() {
+  p1x = -1.0;
+  p1y = -1.0;
+  p1z = -1.0;
+  p2x = -1.0;
+  p2y = 1.0;
+  p2z = 1.0;
+  p3x = 1.0;
+  p3y = 1.0;
+  p3z = -1.0;
+  p4x = 1.0;
+  p4y = -1.0;
+  p4z = 1.0;
+
+  p1ux = 0.0;
+  p1uy = 0.0;
+  p1uz = 0.0;
+  p2ux = 0.0;
+  p2uy = 0.0;
+  p2uz = 0.0;
+  p3ux = 0.0;
+  p3uy = 0.0;
+  p3uz = 0.0;
+  p4ux = 0.0;
+  p4uy = 0.0;
+  p4uz = 0.0;
+
+  p1wx = 0.0;
+  p1wy = 0.0;
+  p1wz = 0.0;
+  p2wx = 0.0;
+  p2wy = 0.0;
+  p2wz = 0.0;
+  p3wx = 0.0;
+  p3wy = 0.0;
+  p3wz = 0.0;
+  p4wx = 0.0;
+  p4wy = 0.0;
+  p4wz = 0.0;
+
+  p1uwx = 0.0;
+  p1uwy = 0.0;
+  p1uwz = 0.0;
+  p2uwx = 0.0;
+  p2uwy = 0.0;
+  p2uwz = 0.0;
+  p3uwx = 0.0;
+  p3uwy = 0.0;
+  p3uwz = 0.0;
+  p4uwx = 0.0;
+  p4uwy = 0.0;
+  p4uwz = 0.0;
+
+  uValue = 0.5;
+  wValue = 0.6;
+  updateOutputLabels();
+  computeCoonsBicubicSurface();
+}
+
+function setupSurface5() {
+  p1x = 1.0;
+  p1y = -1.0;
+  p1z = -1.0;
+  p2x = 1.0;
+  p2y = -1.0;
+  p2z = 1.0;
+  p3x = -1.0;
+  p3y = -1.0;
+  p3z = -1.0;
+  p4x = -1.0;
+  p4y = -1.0;
+  p4z = 1.0;
+
+  p1ux = 0.0;
+  p1uy = 5.0;
+  p1uz = 0.0;
+  p2ux = 0.0;
+  p2uy = 5.0;
+  p2uz = 0.0;
+  p3ux = 0.0;
+  p3uy = -5.0;
+  p3uz = 0.0;
+  p4ux = 0.0;
+  p4uy = -5.0;
+  p4uz = 0.0;
+
+  p1wx = 0.0;
+  p1wy = 5.0;
+  p1wz = 0.0;
+  p2wx = 0.0;
+  p2wy = -5.0;
+  p2wz = 0.0;
+  p3wx = 0.0;
+  p3wy = 5.0;
+  p3wz = 0.0;
+  p4wx = 0.0;
+  p4wy = -5.0;
+  p4wz = 0.0;
+
+  p1uwx = 0.0;
+  p1uwy = 0.0;
+  p1uwz = 0.0;
+  p2uwx = 0.0;
+  p2uwy = 0.0;
+  p2uwz = 0.0;
+  p3uwx = 0.0;
+  p3uwy = 0.0;
+  p3uwz = 0.0;
+  p4uwx = 0.0;
+  p4uwy = 0.0;
+  p4uwz = 0.0;
+
+  uValue = 0.5;
+  wValue = 0.6;
+  updateOutputLabels();
+  computeCoonsBicubicSurface();
+}
+
+function updateOutputLabels() {
+  p1xRange.value = p1x;
+  p1yRange.value = p1y;
+  p1zRange.value = p1z;
+  p2xRange.value = p2x;
+  p2yRange.value = p2y;
+  p2zRange.value = p2z;
+  p3xRange.value = p3x;
+  p3yRange.value = p3y;
+  p3zRange.value = p3z;
+  p4xRange.value = p4x;
+  p4yRange.value = p4y;
+  p4zRange.value = p4z;
+
+  document.getElementById("opPoint1x").textContent = p1x.toFixed(3);
+  document.getElementById("opPoint1y").textContent = p1y.toFixed(3);
+  document.getElementById("opPoint1z").textContent = p1z.toFixed(3);
+
+  document.getElementById("opPoint2x").textContent = p2x.toFixed(3);
+  document.getElementById("opPoint2y").textContent = p2y.toFixed(3);
+  document.getElementById("opPoint2z").textContent = p2z.toFixed(3);
+
+  document.getElementById("opPoint3x").textContent = p3x.toFixed(3);
+  document.getElementById("opPoint3y").textContent = p3y.toFixed(3);
+  document.getElementById("opPoint3z").textContent = p3z.toFixed(3);
+
+  document.getElementById("opPoint4x").textContent = p4x.toFixed(3);
+  document.getElementById("opPoint4y").textContent = p4y.toFixed(3);
+  document.getElementById("opPoint4z").textContent = p4z.toFixed(3);
+
+  p1uxRange.value = p1ux;
+  p2uxRange.value = p2ux;
+  p3uxRange.value = p3ux;
+  p4uxRange.value = p4ux;
+  p1uyRange.value = p1uy;
+  p2uyRange.value = p2uy;
+  p3uyRange.value = p3uy;
+  p4uyRange.value = p4uy;
+  p1uzRange.value = p1uz;
+  p2uzRange.value = p2uz;
+  p3uzRange.value = p3uz;
+  p4uzRange.value = p4uz;
+
+  document.getElementById("opPoint1ux").textContent = p1ux.toFixed(3);
+  document.getElementById("opPoint1uy").textContent = p1uy.toFixed(3);
+  document.getElementById("opPoint1uz").textContent = p1uz.toFixed(3);
+
+  document.getElementById("opPoint2ux").textContent = p2ux.toFixed(3);
+  document.getElementById("opPoint2uy").textContent = p2uy.toFixed(3);
+  document.getElementById("opPoint2uz").textContent = p2uz.toFixed(3);
+
+  document.getElementById("opPoint3ux").textContent = p3ux.toFixed(3);
+  document.getElementById("opPoint3uy").textContent = p3uy.toFixed(3);
+  document.getElementById("opPoint3uz").textContent = p3uz.toFixed(3);
+
+  document.getElementById("opPoint4ux").textContent = p4ux.toFixed(3);
+  document.getElementById("opPoint4uy").textContent = p4uy.toFixed(3);
+  document.getElementById("opPoint4uz").textContent = p4uz.toFixed(3);
+
+  p1wxRange.value = p1wx;
+  p2wxRange.value = p2wx;
+  p3wxRange.value = p3wx;
+  p4wxRange.value = p4wx;
+  p1wyRange.value = p1wy;
+  p2wyRange.value = p2wy;
+  p3wyRange.value = p3wy;
+  p4wyRange.value = p4wy;
+  p1wzRange.value = p1wz;
+  p2wzRange.value = p2wz;
+  p3wzRange.value = p3wz;
+  p4wzRange.value = p4wz;
+
+  document.getElementById("opPoint1wx").textContent = p1wx.toFixed(3);
+  document.getElementById("opPoint1wy").textContent = p1wy.toFixed(3);
+  document.getElementById("opPoint1wz").textContent = p1wz.toFixed(3);
+
+  document.getElementById("opPoint2wx").textContent = p2wx.toFixed(3);
+  document.getElementById("opPoint2wy").textContent = p2wy.toFixed(3);
+  document.getElementById("opPoint2wz").textContent = p2wz.toFixed(3);
+
+  document.getElementById("opPoint3wx").textContent = p3wx.toFixed(3);
+  document.getElementById("opPoint3wy").textContent = p3wy.toFixed(3);
+  document.getElementById("opPoint3wz").textContent = p3wz.toFixed(3);
+
+  document.getElementById("opPoint4wx").textContent = p4wx.toFixed(3);
+  document.getElementById("opPoint4wy").textContent = p4wy.toFixed(3);
+  document.getElementById("opPoint4wz").textContent = p4wz.toFixed(3);
+
+  p1uwxRange.value = p1uwx;
+  p2uwxRange.value = p2uwx;
+  p3uwxRange.value = p3uwx;
+  p4uwxRange.value = p4uwx;
+  p1uwyRange.value = p1uwy;
+  p2uwyRange.value = p2uwy;
+  p3uwyRange.value = p3uwy;
+  p4uwyRange.value = p4uwy;
+  p1uwzRange.value = p1uwz;
+  p2uwzRange.value = p2uwz;
+  p3uwzRange.value = p3uwz;
+  p4uwzRange.value = p4uwz;
+
+  document.getElementById("opPoint1uwx").textContent = p1uwx.toFixed(3);
+  document.getElementById("opPoint1uwy").textContent = p1uwy.toFixed(3);
+  document.getElementById("opPoint1uwz").textContent = p1uwz.toFixed(3);
+
+  document.getElementById("opPoint2uwx").textContent = p2uwx.toFixed(3);
+  document.getElementById("opPoint2uwy").textContent = p2uwy.toFixed(3);
+  document.getElementById("opPoint2uwz").textContent = p2uwz.toFixed(3);
+
+  document.getElementById("opPoint3uwx").textContent = p3uwx.toFixed(3);
+  document.getElementById("opPoint3uwy").textContent = p3uwy.toFixed(3);
+  document.getElementById("opPoint3uwz").textContent = p3uwz.toFixed(3);
+
+  document.getElementById("opPoint4uwx").textContent = p4uwx.toFixed(3);
+  document.getElementById("opPoint4uwy").textContent = p4uwy.toFixed(3);
+  document.getElementById("opPoint4uwz").textContent = p4uwz.toFixed(3);
 }
 
 function initializeValues() {
@@ -1032,7 +1484,7 @@ function renderCoonsBicubicSurface() {
 
   let material = new THREE.MeshPhongMaterial({
     side: THREE.DoubleSide,
-    color: 0xff00ff,
+    color: 0x00ffff,
     specular: 0x050505,
     shininess: 250,
     emissive: 0x111111,
@@ -1041,7 +1493,7 @@ function renderCoonsBicubicSurface() {
 
   let material1 = new THREE.MeshStandardMaterial({
     side: THREE.DoubleSide,
-    color: 0xff00ff,
+    color: 0x00ffff,
     emissive: 0x111111,
     flatShading: false,
     roughness: 1,
@@ -1056,7 +1508,7 @@ function renderCoonsBicubicSurface() {
   });
 
   let materialLine = new THREE.LineBasicMaterial({
-    color: 0xff00ff,
+    color: 0x00ffff,
   });
 
   let geometry = new THREE.BufferGeometry();
@@ -1267,7 +1719,8 @@ function handleCameraAngle() {
   let angle = (cameraAngle * Math.PI) / 180.0;
   let xCam = camRadius * Math.cos(angle);
   let zCam = camRadius * Math.sin(angle);
-  camera.position.set(xCam, 4, zCam);
+  let yHeight = 3;
+  camera.position.set(xCam, yHeight, zCam);
   camera.lookAt(scene.position);
   render();
 }
