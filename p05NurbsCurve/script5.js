@@ -574,7 +574,7 @@ function renderLineAndNurbsCurve() {
   nurbsCurve = new NURBSCurve(nurbsDegree, knotVector, nurbsControlPoints);
   let nurbsGeometry = new THREE.BufferGeometry();
   nurbsGeometry.setFromPoints(nurbsCurve.getPoints(200));
-  let nurbsMaterial = new THREE.LineBasicMaterial({ color: 0xff00ff });
+  let nurbsMaterial = new THREE.LineBasicMaterial({ color: 0x00ffff });
   nurbsLine = new THREE.Line(nurbsGeometry, nurbsMaterial);
   scene.add(lineControl);
   scene.add(nurbsLine);
@@ -590,7 +590,7 @@ function handleCameraAngle() {
   let angle = (cameraAngle * Math.PI) / 180.0;
   let xCam = camRadius * Math.cos(angle);
   let zCam = camRadius * Math.sin(angle);
-  let cameraHeight = 4;
+  let cameraHeight = 3;
   camera.position.set(xCam, cameraHeight, zCam);
   camera.lookAt(scene.position);
   render();
