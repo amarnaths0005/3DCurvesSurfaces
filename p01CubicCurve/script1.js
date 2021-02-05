@@ -900,7 +900,7 @@ function computeCurveHermiteForm() {
 function renderCurve() {
   scene.remove(curveLine);
   let material = new THREE.LineBasicMaterial({
-    color: 0xff00ff,
+    color: 0x00ffff,
     linewidth: 3, // For some reason, this line width does not work
   });
   let geometry = new THREE.BufferGeometry();
@@ -1006,7 +1006,7 @@ function handleCameraAngle() {
   let angle = (cameraAngle * Math.PI) / 180.0;
   let xCam = camRadius * Math.cos(angle);
   let zCam = camRadius * Math.sin(angle);
-  camera.position.set(xCam, 4, zCam);
+  camera.position.set(xCam, 3, zCam);
   camera.lookAt(scene.position);
   render();
 }
