@@ -737,14 +737,14 @@ function renderNurbsSurface() {
 
   let material = new THREE.MeshPhongMaterial({
     side: THREE.DoubleSide,
-    color: 0xff00ff,
+    color: 0x00ffff,
     specular: 0x050505,
     shininess: 100,
     emissive: 0x111111,
   });
 
   let materialLine = new THREE.LineBasicMaterial({
-    color: 0xff00ff,
+    color: 0x00ffff,
   });
 
   let geometry = new THREE.BufferGeometry();
@@ -961,7 +961,7 @@ function handleCameraAngle() {
   let angle = (cameraAngle * Math.PI) / 180.0;
   let xCam = camRadius * Math.cos(angle);
   let zCam = camRadius * Math.sin(angle);
-  let cameraHeight = 4;
+  let cameraHeight = 3;
   camera.position.set(xCam, cameraHeight, zCam);
   camera.lookAt(scene.position);
   render();
