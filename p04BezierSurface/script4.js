@@ -792,6 +792,14 @@ function init() {
     false
   );
 
+  document.getElementById("bnSurface5").addEventListener(
+    "click",
+    function () {
+      setupSurface5();
+    },
+    false
+  );
+
   setupCubePoints();
   setupWireframeBox();
   handleCameraAngle();
@@ -921,7 +929,7 @@ function setupSurface1() {
   computeBezierSurface();
 }
 
-function setupSurface2() {
+function setupSurface5() {
   p00x = 1.0;
   p00y = 0.0;
   p00z = -1.0;
@@ -1088,6 +1096,62 @@ function setupSurface4() {
   p33y = 0.0;
   p33z = 1.0;
 
+  updateOutputLabels();
+  computeBezierSurface();
+}
+
+function setupSurface2() {
+  p00x = 1.0;
+  p00y = -1.0;
+  p00z = -1.0;
+  p01x = 1.0;
+  p01y = -0.3;
+  p01z = -1.0;
+  p02x = 1.0;
+  p02y = 0.3;
+  p02z = -1.0;
+  p03x = 1.0;
+  p03y = 1.0;
+  p03z = -1.0;
+
+  p10x = -1.0;
+  p10y = -1.0;
+  p10z = -0.3;
+  p11x = -3.0;
+  p11y = -0.3;
+  p11z = -0.3;
+  p12x = -3.0;
+  p12y = 0.3;
+  p12z = -0.3;
+  p13x = 1.0;
+  p13y = 1.0;
+  p13z = -0.3;
+
+  p20x = 1.0;
+  p20y = -1.0;
+  p20z = 0.3;
+  p21x = -3.0;
+  p21y = -0.3;
+  p21z = 0.3;
+  p22x = -3.0;
+  p22y = 0.3;
+  p22z = 0.3;
+  p23x = 1.0;
+  p23y = 1.0;
+  p23z = 0.3;
+
+  p30x = 1.0;
+  p30y = -1.0;
+  p30z = 1.0;
+  p31x = 1.0;
+  p31y = -0.3;
+  p31z = 1.0;
+  p32x = 1.0;
+  p32y = 0.3;
+  p32z = 1.0;
+  p33x = 1.0;
+  p33y = 1.0;
+  p33z = 1.0;
   updateOutputLabels();
   computeBezierSurface();
 }
