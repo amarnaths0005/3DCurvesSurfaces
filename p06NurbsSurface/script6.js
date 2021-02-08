@@ -49,7 +49,7 @@ let knotVectorU = [],
   knotVectorW = [];
 let nurbsSurface;
 let surfacePoints = [];
-let noDivisions = 75;
+let noDivisions = 30;
 let step, width, tableData;
 let surfaceMesh, lineWire, wireCheck;
 let selectedRow, selectedi, selectedj;
@@ -720,8 +720,8 @@ function computeNurbsSurface() {
       uVal = i * step;
       let pt = new Vector3();
       nurbsSurface.getPoint(uVal, wVal, pt);
-      let poi = new THREE.Vector3(pt.x, pt.y, pt.z);
-      surfacePoints.push(poi);
+      //let poi = new THREE.Vector3();
+      surfacePoints.push(pt.x, pt.y, pt.z);
     }
   }
   renderNurbsSurface();
@@ -735,12 +735,15 @@ function renderNurbsSurface() {
   scene.remove(surfaceMesh);
   scene.remove(lineWire);
 
-  let material = new THREE.MeshPhongMaterial({
+  let material = new THREE.MeshStandardMaterial({
     side: THREE.DoubleSide,
     color: 0x00ffff,
-    specular: 0x050505,
-    shininess: 100,
     emissive: 0x111111,
+    dithering: true,
+    flatShading: false,
+    roughness: 1,
+    metalness: 0.15,
+    skinning: true,
   });
 
   let materialLine = new THREE.LineBasicMaterial({
@@ -748,13 +751,6 @@ function renderNurbsSurface() {
   });
 
   let geometry = new THREE.BufferGeometry();
-  let vertices = [];
-  vertices.length = 0;
-  for (let i = 0; i < surfacePoints.length; ++i) {
-    vertices.push(surfacePoints[i]);
-  }
-
-  let index1, index2, index3, index4, index5, index6;
   const pA = new THREE.Vector3();
   const pB = new THREE.Vector3();
   const pC = new THREE.Vector3();
@@ -770,83 +766,41 @@ function renderNurbsSurface() {
 
   for (let j = 0; j < noDivisions; ++j) {
     for (let i = 0; i < noDivisions; ++i) {
-      index1 = (noDivisions + 1) * i + j;
-      index2 = index1 + 1;
-      index3 = index1 + noDivisions + 1;
-      index4 = index2;
-      index5 = index3;
-      index6 = index5 + 1;
+      const a = j * (noDivisions + 1) + (i + 1);
+      const b = j * (noDivisions + 1) + i;
+      const c = (j + 1) * (noDivisions + 1) + i;
+      const d = (j + 1) * (noDivisions + 1) + (i + 1);
 
-      pA.set(
-        surfacePoints[index1].x,
-        surfacePoints[index1].y,
-        surfacePoints[index1].z
-      );
-      pB.set(
-        surfacePoints[index2].x,
-        surfacePoints[index2].y,
-        surfacePoints[index2].z
-      );
-      pC.set(
-        surfacePoints[index3].x,
-        surfacePoints[index3].y,
-        surfacePoints[index3].z
-      );
-      positions.push(pA.x, pA.y, pA.z);
-      positions.push(pB.x, pB.y, pB.z);
-      positions.push(pC.x, pC.y, pC.z);
+      // generate two faces (triangles) per iteration
+      indices.push(a, b, d); // face one
+
+      pA.set(surfacePoints[a].x, surfacePoints[a].y, surfacePoints[a].z);
+      pB.set(surfacePoints[b].x, surfacePoints[b].y, surfacePoints[b].z);
+      pC.set(surfacePoints[d].x, surfacePoints[d].y, surfacePoints[d].z);
 
       cb.subVectors(pC, pB);
       ab.subVectors(pA, pB);
       cb.cross(ab);
       cb.normalize();
-      const nx1 = cb.x;
-      const ny1 = cb.y;
-      const nz1 = cb.z;
-      normals.push(nx1, ny1, nz1);
-      normals.push(nx1, ny1, nz1);
-      normals.push(nx1, ny1, nz1);
-      indices.push(index1, index2, index3);
+      normals.push(cb.x, cb.y, cb.z);
 
-      pA.set(
-        surfacePoints[index4].x,
-        surfacePoints[index4].y,
-        surfacePoints[index4].z
-      );
-      pB.set(
-        surfacePoints[index6].x,
-        surfacePoints[index6].y,
-        surfacePoints[index6].z
-      );
-      pC.set(
-        surfacePoints[index5].x,
-        surfacePoints[index5].y,
-        surfacePoints[index5].z
-      );
-      positions.push(pA.x, pA.y, pA.z);
-      positions.push(pB.x, pB.y, pB.z);
-      positions.push(pC.x, pC.y, pC.z);
+      indices.push(b, c, d); // face two
+      pA.set(surfacePoints[b].x, surfacePoints[b].y, surfacePoints[b].z);
+      pB.set(surfacePoints[c].x, surfacePoints[c].y, surfacePoints[c].z);
+      pC.set(surfacePoints[d].x, surfacePoints[d].y, surfacePoints[d].z);
 
       cb.subVectors(pC, pB);
       ab.subVectors(pA, pB);
       cb.cross(ab);
       cb.normalize();
-      const nx2 = cb.x;
-      const ny2 = cb.y;
-      const nz2 = cb.z;
-      normals.push(nx2, ny2, nz2);
-      normals.push(nx2, ny2, nz2);
-      normals.push(nx2, ny2, nz2);
-      indices.push(index4, index6, index5);
-
-      //geometry.faces.push(new THREE.Face3(index1, index2, index3));
-      //geometry.faces.push(new THREE.Face3(index4, index6, index5));
+      normals.push(cb.x, cb.y, cb.z);
     }
   }
 
+  geometry.setIndex(indices);
   geometry.setAttribute(
     "position",
-    new THREE.Float32BufferAttribute(positions, 3).onUpload(disposeArray)
+    new THREE.Float32BufferAttribute(surfacePoints, 3).onUpload(disposeArray)
   );
   geometry.setAttribute(
     "normal",
@@ -854,9 +808,6 @@ function renderNurbsSurface() {
   );
 
   geometry.computeVertexNormals();
-
-  //geometry.computeFaceNormals();
-  //geometry.computeVertexNormals();
   if (document.getElementById("wireframe").checked === true) {
     let surfaceWire = new THREE.WireframeGeometry(geometry);
     lineWire = new THREE.LineSegments(surfaceWire, materialLine);
@@ -865,6 +816,7 @@ function renderNurbsSurface() {
     surfaceMesh = new THREE.Mesh(geometry, material);
     scene.add(surfaceMesh);
   }
+
   render();
 }
 
