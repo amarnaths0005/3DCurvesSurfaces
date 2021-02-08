@@ -71,7 +71,7 @@ function init() {
     0.1,
     1000
   );
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({ antialias: true });
 
   window.addEventListener("resize", onResize, false);
 
