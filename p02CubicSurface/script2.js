@@ -94,7 +94,7 @@ function init() {
     1000
   );
   camera.updateProjectionMatrix();
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.antialias = true;
 
   window.addEventListener("resize", onResize, false);
