@@ -59,7 +59,7 @@ function init() {
     0.1,
     1000
   );
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({ antialias: true });
   uRange = document.getElementById("uValue");
   camRadius = 5;
   noUPoints = 1000;
