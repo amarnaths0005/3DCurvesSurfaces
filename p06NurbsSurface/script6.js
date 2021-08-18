@@ -1,6 +1,8 @@
 // HTML Program to draw and manipulate a NURBS Surface
 // Written by Amarnath S, amarnaths.codeproject@gmail.com, July 2019
 // Modified and fixed some bugs - August 2019
+// Revised August 2021. Fixed an issue with computation of normals.
+//  Now, Three.js does the normal computations.
 
 // NURBS Surface = Non Uniform Rational B-Spline Surface
 
@@ -751,49 +753,20 @@ function renderNurbsSurface() {
   });
 
   let geometry = new THREE.BufferGeometry();
-  const pA = new THREE.Vector3();
-  const pB = new THREE.Vector3();
-  const pC = new THREE.Vector3();
-
-  const cb = new THREE.Vector3();
-  const ab = new THREE.Vector3();
-  const positions = [];
-  positions.length = 0;
-  const normals = [];
-  normals.length = 0;
   const indices = [];
   indices.length = 0;
 
-  for (let j = 0; j < noDivisions; ++j) {
-    for (let i = 0; i < noDivisions; ++i) {
-      const a = j * (noDivisions + 1) + (i + 1);
-      const b = j * (noDivisions + 1) + i;
-      const c = (j + 1) * (noDivisions + 1) + i;
-      const d = (j + 1) * (noDivisions + 1) + (i + 1);
+  for (let i = 0; i < noDivisions; i++) {
+    for (let j = 0; j < noDivisions; j++) {
+      const a = i * (noDivisions + 1) + (j + 1);
+      const b = i * (noDivisions + 1) + j;
+      const c = (i + 1) * (noDivisions + 1) + j;
+      const d = (i + 1) * (noDivisions + 1) + (j + 1);
 
       // generate two faces (triangles) per iteration
+
       indices.push(a, b, d); // face one
-
-      pA.set(surfacePoints[a].x, surfacePoints[a].y, surfacePoints[a].z);
-      pB.set(surfacePoints[b].x, surfacePoints[b].y, surfacePoints[b].z);
-      pC.set(surfacePoints[d].x, surfacePoints[d].y, surfacePoints[d].z);
-
-      cb.subVectors(pC, pB);
-      ab.subVectors(pA, pB);
-      cb.cross(ab);
-      cb.normalize();
-      normals.push(cb.x, cb.y, cb.z);
-
       indices.push(b, c, d); // face two
-      pA.set(surfacePoints[b].x, surfacePoints[b].y, surfacePoints[b].z);
-      pB.set(surfacePoints[c].x, surfacePoints[c].y, surfacePoints[c].z);
-      pC.set(surfacePoints[d].x, surfacePoints[d].y, surfacePoints[d].z);
-
-      cb.subVectors(pC, pB);
-      ab.subVectors(pA, pB);
-      cb.cross(ab);
-      cb.normalize();
-      normals.push(cb.x, cb.y, cb.z);
     }
   }
 
@@ -802,12 +775,8 @@ function renderNurbsSurface() {
     "position",
     new THREE.Float32BufferAttribute(surfacePoints, 3).onUpload(disposeArray)
   );
-  geometry.setAttribute(
-    "normal",
-    new THREE.Float32BufferAttribute(normals, 3).onUpload(disposeArray)
-  );
-
   geometry.computeVertexNormals();
+
   if (document.getElementById("wireframe").checked === true) {
     let surfaceWire = new THREE.WireframeGeometry(geometry);
     lineWire = new THREE.LineSegments(surfaceWire, materialLine);
