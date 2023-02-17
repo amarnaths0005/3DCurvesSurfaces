@@ -3,6 +3,11 @@
 // Revised August 2021. Fixed an issue with computation of normals.
 //  Now, Three.js does the normal computations.
 
+// Updated in September 2022, to include image textures.
+// Also updated to Revision 144 of Three.js
+// Further updated Feb 2023, to include texture
+// Further updated to Revision 149 of Three.js, Feb 2023
+
 /* Requirements:
    1. Should enable the user to modify the x, y, z coordinates of the 16 control points
        forming a 4 x 4 grid of control points for the Bezier Surface.
@@ -62,6 +67,14 @@ let lineControl1, lineControl2, lineControl3, lineControl4, lineControl5;
 let noDivisions = 30;
 let step;
 let surfaceMesh, lineWire;
+let textureCheck;
+let canvas, ctx;
+let img;
+let materialT;
+let canvasBig, ctxBig;
+let material;
+let materialLine;
+let uvArray = [];
 
 window.onload = init;
 
@@ -83,10 +96,50 @@ function init() {
   wireCheck = document.getElementById("wireframe");
   wireCheck.addEventListener("click", handleWireframe, false);
 
+  textureCheck = document.getElementById("showTexture");
+  textureCheck.addEventListener("click", handleTexture, false);
+  textureCheck.checked = false;
+
   cameraAngle = 25;
   camRadius = 5;
 
+  uvArray.length = 0;
+
+  //console.log("Three Revision " + THREE.REVISION);
+
   halfCubeSide = 1;
+
+  const image_input = document.querySelector("#image-input");
+  image_input.addEventListener("change", function (e) {
+    if (this.files && this.files[0]) {
+      drawImage(this.files[0]);
+    }
+  });
+
+  canvas = document.getElementById("canvasImage");
+  ctx = canvas.getContext("2d");
+  canvasBig = document.createElement("canvas");
+  ctxBig = canvasBig.getContext("2d");
+  textureImage = new THREE.TextureLoader();
+
+  material = new THREE.MeshStandardMaterial({
+    side: THREE.DoubleSide,
+    color: 0x00ffff,
+    emissive: 0x111111,
+    dithering: true,
+    flatShading: false,
+    roughness: 1,
+    metalness: 0.15,
+  });
+
+  materialLine = new THREE.LineBasicMaterial({
+    color: 0x00ffff,
+  });
+
+  materialT = new THREE.MeshBasicMaterial({
+    map: textureImage,
+    side: THREE.DoubleSide,
+  });
 
   // There is a more efficient way of writing the following code, using arrays.
   // For this project, I will use the long form of code. For another project
@@ -806,6 +859,7 @@ function init() {
   setupWireframeBox();
   handleCameraAngle();
   handleUWValue();
+  handleTexture();
 
   document.getElementById("defaultOpen").click();
 
@@ -813,6 +867,60 @@ function init() {
 
   animate();
   render();
+}
+
+function drawImage(imageFile) {
+  let reader = new FileReader();
+
+  //capture the file information.
+  reader.onload = function (e) {
+    // For drawing an image on a canvas we
+    // need an image object
+    img = new Image();
+
+    // Even if the file has been read, decoding
+    // the dataURL format may take some time
+    // so we need to use the regular way of
+    // working with images: onload callback
+    // that will be called after setting the src attribute
+    img.onload = function (e) {
+      // draw the image
+      drawImg(ctx, img);
+    };
+
+    // e.target.result is the dataURL, so we set the
+    // src if the image with it. This will call asynchronously
+    // the onload callback
+    img.src = e.target.result;
+  };
+
+  // Read in the image file as a data URL.
+  reader.readAsDataURL(imageFile);
+}
+
+function drawImg(ctx, imag) {
+  let sizeW = imag.width;
+  let sizeH = imag.height;
+
+  let imgDim = 800; // Magic number here
+  canvasBig.width = imgDim;
+  canvasBig.height = imgDim;
+  ctxBig.drawImage(imag, 0, 0, imgDim, imgDim);
+
+  let ratio1 = canvas.width / sizeW;
+  let ratio2 = canvas.height / sizeH;
+  let zoomFactor = Math.min(ratio1, ratio2);
+
+  sizeW *= zoomFactor;
+  sizeH *= zoomFactor;
+
+  let startX = (canvas.width - sizeW) / 2;
+  let startY = (canvas.height - sizeH) / 2;
+
+  ctx.fillStyle = "#292929";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(imag, startX, startY, sizeW, sizeH);
+  computeBezierSurface();
 }
 
 function initializeValues() {
@@ -1265,6 +1373,15 @@ function updateOutputLabels() {
 }
 
 function handleWireframe() {
+  computeBezierSurface();
+}
+
+function handleTexture() {
+  if (textureCheck.checked === false) {
+    document.getElementById("selImg").style.display = "none";
+  } else {
+    document.getElementById("selImg").style.display = "block";
+  }
   computeBezierSurface();
 }
 
@@ -1793,14 +1910,17 @@ function computeBezierSurface() {
   surfacePoints.length = 0;
   let uVal, wVal;
 
+  uvArray.length = 0;
+
   for (let j = 0; j <= noDivisions; ++j) {
     wVal = j * step;
     for (let i = 0; i <= noDivisions; ++i) {
       uVal = i * step;
 
       let pt = computeBezierSurfacePoint(uVal, wVal);
-      //let poi = new THREE.Vector3(pt.xVal, pt.yVal, pt.zVal);
       surfacePoints.push(pt.xVal, pt.yVal, pt.zVal);
+      uvArray.push(1.0 - wVal);
+      uvArray.push(uVal);
     }
   }
   renderSurface();
@@ -1815,21 +1935,6 @@ function renderSurface() {
   scene.remove(surfaceMesh);
   scene.remove(lineWire);
 
-  let material = new THREE.MeshStandardMaterial({
-    side: THREE.DoubleSide,
-    color: 0x00ffff,
-    emissive: 0x111111,
-    dithering: true,
-    flatShading: false,
-    roughness: 1,
-    metalness: 0.15,
-    skinning: true,
-  });
-
-  let materialLine = new THREE.LineBasicMaterial({
-    color: 0x00ffff,
-  });
-
   let geometry = new THREE.BufferGeometry();
   const indices = [];
   indices.length = 0;
@@ -1842,17 +1947,24 @@ function renderSurface() {
       const d = (i + 1) * (noDivisions + 1) + (j + 1);
 
       // generate two faces (triangles) per iteration
-
       indices.push(a, b, d); // face one
       indices.push(b, c, d); // face two
     }
   }
 
-  geometry.setIndex(indices);
   geometry.setAttribute(
     "position",
     new THREE.Float32BufferAttribute(surfacePoints, 3).onUpload(disposeArray)
   );
+  const uvNumComponents = 2;
+  geometry.setAttribute(
+    "uv",
+    new THREE.BufferAttribute(
+      new Float32Array(uvArray),
+      uvNumComponents
+    ).onUpload(disposeArray)
+  );
+  geometry.setIndex(indices);
   geometry.computeVertexNormals();
 
   if (document.getElementById("wireframe").checked === true) {
@@ -1860,10 +1972,15 @@ function renderSurface() {
     lineWire = new THREE.LineSegments(surfaceWire, materialLine);
     scene.add(lineWire);
   } else {
-    surfaceMesh = new THREE.Mesh(geometry, material);
+    if (textureCheck.checked === true) {
+      materialT.map = new THREE.CanvasTexture(canvasBig);
+      surfaceMesh = new THREE.Mesh(geometry, materialT);
+    } else {
+      surfaceMesh = new THREE.Mesh(geometry, material);
+    }
+    surfaceMesh.material.needsUpdate = true;
     scene.add(surfaceMesh);
   }
-
   render();
 }
 
