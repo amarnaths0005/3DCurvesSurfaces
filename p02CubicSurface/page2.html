@@ -585,6 +585,24 @@
           <button id="bnSurface5">Canopy</button>
         </fieldset>
 
+        <input type="checkbox" id="showTexture" /> Show Texture<br />
+        <div id="selImg">
+          <form>
+            <input
+              type="file"
+              id="image-input"
+              accept="image/jpeg, image/png, image/jpg"
+            />
+            <br />
+            <div>
+              <canvas id="canvasImage" width="50" height="50" highlightthickness="0">
+                Your browser does not support canvas
+              </canvas>
+            </div>
+            <br />
+          </form>
+        </div>
+
         <form>
           Camera Angle
           <input
