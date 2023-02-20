@@ -1,6 +1,8 @@
 // HTML Program to draw and manipulate a Bezier Curve with five control points.
 // Written by Amarnath S, amarnaths.codeproject@gmail.com, July 2019
 
+// September 2022 - Updated to Revision 144 of Three.js
+
 /* Requirements:
    1. Should enable the user to modify the x, y, z coordinates of five control points,
       in the Five Point Form of Bezier Curve.
@@ -62,6 +64,8 @@ function init() {
   window.addEventListener("resize", onResize, false);
 
   cameraAngle = 25; // degrees
+
+  //console.log("Three Revision " + THREE.REVISION);
 
   // Initialize points for the Five Point Form
   initializePoints();
