@@ -109,7 +109,7 @@ function init() {
 
   window.addEventListener("resize", onResize, false);
 
-  //console.log("Three Revision " + THREE.REVISION);
+  console.log("Three Revision " + THREE.REVISION);
 
   for (let i = 0; i < points.length; i++) {
     points[i] = new Array(noPoints);
