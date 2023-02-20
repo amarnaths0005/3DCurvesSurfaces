@@ -3,6 +3,8 @@
 // Written by Amarnath S, amarnaths.codeproject@gmail.com, July 2019
 // Updated Jan 2021, with latest version of Three.js - 125
 
+// September 2022 - Updated to Revision 144 of Three.js
+
 /* Requirements:
    1. Should enable the user to modify the x, y, z coordinates of four points, 
       in the Four Point Form of a Parametric Cubic Curve.
@@ -64,7 +66,8 @@ function init() {
   camRadius = 5;
   noUPoints = 1000;
   uStep = 1.0 / noUPoints;
-  //curvePointsTypedArray = new Float32Array(noUPoints * 3);
+
+  //console.log("Three Revision " + THREE.REVISION);
 
   // Four Point Tab
   p1xRange = document.getElementById("point1x");
