@@ -1,6 +1,8 @@
 // HTML Program to draw and manipulate a NURBS Curve
 // Written by Amarnath S, amarnaths.codeproject@gmail.com, July 2019
 
+// September 2022 - Updated to Revision 144 of Three.js
+
 // NURBS Curve = Non Uniform Rational B-Spline Curve
 
 /* Requirements:
@@ -78,6 +80,8 @@ function init() {
   cameraAngle = 25;
   camRadius = 5;
   halfCubeSide = 1;
+
+  //console.log("Three Revision " + THREE.REVISION);
 
   renderer.setClearColor(new THREE.Color(0x111111));
   renderer.setSize(width, window.innerHeight);
@@ -434,7 +438,7 @@ function updateKnotVector() {
 
   for (let i = 0, j = nurbsControlPoints.length; i < j; i++) {
     let knot = (i + 1) / (j - nurbsDegree);
-    knotVector.push(THREE.Math.clamp(knot, 0, 1));
+    knotVector.push(THREE.MathUtils.clamp(knot, 0, 1));
   }
 }
 
